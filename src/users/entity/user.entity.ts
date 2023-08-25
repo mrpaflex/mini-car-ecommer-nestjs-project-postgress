@@ -9,7 +9,6 @@ export class UserEntity{
     id: number;
 
     @Column()
-    
     email: string;
     
     @Exclude()
