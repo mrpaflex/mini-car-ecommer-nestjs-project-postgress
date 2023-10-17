@@ -11,7 +11,7 @@ export class UserEntity{
     @Column()
     email: string;
     
-    @Exclude()
+    // @Exclude()
     @Column()
     password: string;
 

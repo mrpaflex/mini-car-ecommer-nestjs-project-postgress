@@ -1,8 +1,8 @@
-import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { UserEntity } from './entity/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { usersDto } from './dto/users.dto';
+import { CreateUsersDto } from './dto/users.dto';
 
 @Injectable()
 export class UsersService {
@@ -11,9 +11,9 @@ export class UsersService {
 //     const userhold = this.repo.create(body);
 //     return this.repo.save(userhold);
 
-    createuser(email: string, password: string){
-        const userhold = this.repo.create({email, password});
-        return this.repo.save(userhold);
+   async createuser(userdto: CreateUsersDto): Promise<UserEntity>{
+        const createuser = this.repo.create(userdto);
+        return  await this.repo.save(createuser);
 }
 
 // async allusers(){
@@ -25,16 +25,18 @@ export class UsersService {
 // }
 
 async findoneuser(id: number) {
-    const user = await this.repo.findOne({where: {id:id}});
-    if(!user){
-        return null;
-       // throw new NotFoundException('user not found');
+    //this is the best way to structure code to make logout request work..
+    //because if you use findOne by id it will loop and return the first user with id 1
+    
+    if(!id){
+        return null
     }
-    return user;
+    return  await this.repo.findOne({where: {id:id}});
+   
 }
 
  finduser(email: string){
-    return  this.repo.find({where: {email}});
+    return  this.repo.find({where: {email: email}});
 }
 
 async updateuserInfo(id: number, body: Partial<UserEntity>){

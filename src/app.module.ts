@@ -7,6 +7,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from './users/entity/user.entity';
 import { UserReports } from './report/entity/report.entity';
 
+//const cookieSession = require('cookie-session');
+
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -17,6 +19,11 @@ import { UserReports } from './report/entity/report.entity';
     }),
     UsersModule, 
     ReportModule],
+
+
+
+
+    
   controllers: [AppController],
   providers: [AppService],
 })
