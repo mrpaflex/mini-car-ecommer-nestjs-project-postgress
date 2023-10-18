@@ -13,6 +13,7 @@ async function bootstrap() {
    keys: ['paflexswot'],
  }));
 
+//this work and the one in the app.module works too.. so any one w=you will like to use
 
   app.useGlobalPipes(
      new ValidationPipe({

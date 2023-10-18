@@ -38,6 +38,8 @@ export class AuthService{
 
         const hashpassword = salt + "." + hash.toString('hex');
 
+        userdto.password= hashpassword
+
          //now create a new user since you have finish the password
          //omo this password hashing no easy
          const newuser = await this.usersService.createuser(userdto);

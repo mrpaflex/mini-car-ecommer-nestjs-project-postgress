@@ -59,7 +59,7 @@ export class UsersController {
     @Serialized(userSeriliazeDTO)
     @Get('profile')
     @UseGuards(AuthGuards)
-    userProfile(@CurrentUser() user: UserEntity){
+    userProfile( @CurrentUser() user: UserEntity){
         if(user){
             return user
         }

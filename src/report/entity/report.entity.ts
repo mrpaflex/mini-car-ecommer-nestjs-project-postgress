@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm"
+import { UserEntity } from "src/users/entity/user.entity";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
 
 @Entity()
 export class UserReports{
@@ -8,4 +9,32 @@ export class UserReports{
 
     @Column()
     price: number;
+
+    @Column()
+    model: string
+
+    @Column({default: false})
+    approved: boolean
+
+    @Column()
+    mileage: number
+
+    @Column()
+    lat: number;
+    @Column()
+    lng: number
+
+    @Column()
+    year: number;
+    @Column()
+    make: string;
+
+    @Column({type: 'datetime', default: ()=> 'current_timestamp'})
+    createdAt: Date
+
+    //relationship or associate
+
+    @ManyToOne(()=> UserEntity, (user)=>user.reports)
+    user: UserEntity
+
 }
